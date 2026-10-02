@@ -1,0 +1,14 @@
+[build-system]
+requires = ["setuptools>=64"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "ca_plotting"
+version = "0.1.0"
+description = "Shared matplotlib style for consistent figures in Google Docs reports"
+readme = "README.md"
+requires-python = ">=3.9"
+dependencies = ["matplotlib>=3.6"]
+
+[tool.setuptools.packages.find]
+where = ["src"]
