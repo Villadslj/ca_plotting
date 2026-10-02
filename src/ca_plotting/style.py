@@ -24,7 +24,7 @@ FONTS = {
         "mathtext.rm": "DM Sans",
         "mathtext.it": "DM Sans:italic",
         "mathtext.bf": "DM Sans:bold",
-        "mathtext.fallback": "stixsans",   # Greek letters and symbols DM Sans lacks
+        "mathtext.fallback": "stix",   # Greek letters and symbols DM Sans lacks
     },
     "serif": {
         "font.family": "serif",
