@@ -78,3 +78,39 @@ def use(font="dmsans", **overrides):
     if overrides:
         mpl.rcParams.update(overrides)
     _applied = True
+
+
+def set_page(page="a4", textwidth_in=None):
+    """Select page preset ('a4', 'letter') or give a custom text width in inches."""
+    global _textwidth
+    if textwidth_in is not None:
+        _textwidth = float(textwidth_in)
+    else:
+        try:
+            _textwidth = PAGES[page.lower()]
+        except KeyError:
+            raise ValueError(f"unknown page {page!r}; choose from {sorted(PAGES)}")
+    WIDTHS.clear()
+    WIDTHS.update({k: _textwidth * f for k, f in _FRACTIONS.items()})
+
+
+def textwidth():
+    """Current text width in inches."""
+    return _textwidth
+
+
+def figure(width="full", aspect=0.62, **kw):
+    """plt.subplots with a document-fixed size. `width` is a WIDTHS key or inches."""
+    if not _applied:
+        use()
+    w = WIDTHS[width] if isinstance(width, str) else float(width)
+    kw.setdefault("layout", "constrained")
+    return plt.subplots(figsize=(w, w * aspect), **kw)
+
+
+def save(fig, name, dpi=300):
+    """Save as <name>.png at the exact figure size. Returns the path."""
+    path = Path(name).with_suffix(".png")
+    path.parent.mkdir(parents=True, exist_ok=True)
+    fig.savefig(path, dpi=dpi, bbox_inches=None)
+    return path
