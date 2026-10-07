@@ -4,14 +4,30 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "ca_plotting"
-version = "0.1.0"
+dynamic = ["version"]
 description = "Shared matplotlib style for consistent figures in Google Docs reports"
 readme = "README.md"
 requires-python = ">=3.9"
 dependencies = ["matplotlib>=3.6"]
+
+[project.urls]
+Homepage = "https://github.com/Villadslj/ca_plotting"
+Source = "https://github.com/Villadslj/ca_plotting"
+
+[project.optional-dependencies]
+test = ["pytest>=7"]
+
+[tool.setuptools.dynamic]
+version = {attr = "ca_plotting._version.__version__"}
 
 [tool.setuptools.packages.find]
 where = ["src"]
 
 [tool.setuptools.package-data]
 ca_plotting = ["fonts/*.ttf", "fonts/OFL.txt"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+markers = [
+    "slow: tests that build and install the package into a clean virtualenv",
+]

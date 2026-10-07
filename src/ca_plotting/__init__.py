@@ -5,6 +5,7 @@
     ...
     cap.save(fig, "out/fig_dispersion")
 """
+from ._version import __version__
 from .style import (
     PAGES,
     WIDTHS,
@@ -16,6 +17,5 @@ from .style import (
     textwidth,
 )
 
-__version__ = "0.2.0"
 __all__ = ["PAGES", "WIDTHS", "RC", "use", "set_page", "figure", "save",
            "textwidth", "__version__"]
