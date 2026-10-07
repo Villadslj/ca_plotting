@@ -10,7 +10,28 @@ pip install git+https://github.com/Villadslj/ca_plotting.git
 pip install git+https://github.com/Villadslj/ca_plotting.git@v0.1.0
 ```
 
-For development: clone the repo and run `pip install -e .`.
+To update an existing install to the newest commit on `main`:
+
+```bash
+pip install --upgrade --force-reinstall git+https://github.com/Villadslj/ca_plotting.git
+```
+
+The package version lives in `src/ca_plotting/_version.py` and is read by
+`pyproject.toml`, so bumping it there is enough for `pip install --upgrade` to
+pick up a new release.
+
+For development: clone the repo and run `pip install -e ".[test]"`.
+
+## Tests
+
+```bash
+pytest                 # everything
+pytest -m "not slow"   # skip the clean-virtualenv install check
+```
+
+`tests/test_clean_install.py` builds the project, installs it into a fresh
+virtualenv and verifies that a clean Python can import `ca_plotting`, find the
+bundled fonts and create and save a figure.
 
 ## Use
 
